@@ -442,117 +442,101 @@ export default class CesiumApp {
         this.viewer.entities.removeAll()
     }
 
+    clearImageryLayers() {
+        if (!this.viewer) return
+        const layers = this.viewer.imageryLayers
+        while (layers.length > 0) {
+            layers.remove(layers.get(0), false)
+        }
+    }
+
+    addImageryProvider(provider) {
+        if (!this.viewer || !provider) return
+        const viewer = this.viewer
+        const add = () => {
+            if (this.viewer !== viewer) return
+            viewer.imageryLayers.addImageryProvider(provider)
+        }
+        if (provider.ready) {
+            add()
+            return
+        }
+        if (provider.readyPromise) {
+            provider.readyPromise.then(add)
+            return
+        }
+        add()
+    }
+
     // 切换底图
     switchLayer(data) {
-        let Imagery = null
-
-        if (this.viewer) {
-            const layers = this.viewer.imageryLayers
-            while (layers.length > 0) {
-                layers.remove(layers.get(0), false)
-            }
-        }
+        this.clearImageryLayers()
 
         switch (data) {
             case 'ArcGis实景图层':
-                /**
-                 * 和高德文字不匹配
-                 * @type {Cesium.ArcGisMapServerImageryProvider}
-                 */
-                Imagery = new Cesium.ArcGisMapServerImageryProvider({
-                    url: 'https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer',
-                    enablePickFeatures: false,
-                })
-                this.viewer.imageryLayers.addImageryProvider(Imagery)
-                const _layer = this.viewer.imageryLayers.get(0);
-                // _layer.brightness = 0.2
+            case "谷歌地图":
+                // ArcGisMapServer 要先拉元数据，没 ready 时 _resource 是空的会把渲染打崩
+                this.addImageryProvider(new Cesium.UrlTemplateImageryProvider({
+                    url: 'https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
+                    maximumLevel: 18
+                }))
                 break
             case 'geoq智图黑':
-                Imagery = new Cesium.ArcGisMapServerImageryProvider({
-                    url: 'https://map.geoq.cn/ArcGIS/rest/services/ChinaOnlineStreetPurplishBlue/MapServer',
-                })
-                this.viewer.imageryLayers.addImageryProvider(Imagery)
+                this.addImageryProvider(new Cesium.UrlTemplateImageryProvider({
+                    url: 'https://map.geoq.cn/ArcGIS/rest/services/ChinaOnlineStreetPurplishBlue/MapServer/tile/{z}/{y}/{x}',
+                    maximumLevel: 18
+                }))
                 break
             /**
              * 无国外影像,国内部分无数据
              */
             case '高德卫星':
-                Imagery = new Cesium.UrlTemplateImageryProvider({
+                this.addImageryProvider(new Cesium.UrlTemplateImageryProvider({
                     url: 'https://webst02.is.autonavi.com/appmaptile?style=6&x={x}&y={y}&z={z}',
                     minimumLevel: 3,
                     maximumLevel: 18,
-                })
-                Imagery.name = "高德卫星"
-                this.viewer.imageryLayers.addImageryProvider(Imagery)
-
-                Imagery = new Cesium.UrlTemplateImageryProvider({
+                }))
+                this.addImageryProvider(new Cesium.UrlTemplateImageryProvider({
                     url: 'http://webst02.is.autonavi.com/appmaptile?x={x}&y={y}&z={z}&lang=zh_cn&size=1&scale=1&style=8',
                     minimumLevel: 3,
                     maximumLevel: 18,
-                })
-                Imagery.name = "高德文字"
-                this.viewer.imageryLayers.addImageryProvider(Imagery)
+                }))
                 break
 
             case '纯黑':
-                this.viewer.scene.globe.baseColor = Cesium.Color.BLACK // 设置地球颜色
+                this.viewer.scene.globe.baseColor = Cesium.Color.BLACK
                 break
 
             case 'BING':
-                let _a = new Cesium.IonImageryProvider({ assetId: 3 })
-                _a.name = "BING"
-                const layer = this.viewer.imageryLayers.addImageryProvider(
-                    _a
-                );
+                this.addImageryProvider(new Cesium.IonImageryProvider({ assetId: 3 }))
                 break
             case 'BING道路':
-                let BING_ROAD = new Cesium.IonImageryProvider({ assetId: 4 })
-                BING_ROAD.name = "BING"
-                const layer1 = this.viewer.imageryLayers.addImageryProvider(
-                    BING_ROAD
-                );
+                this.addImageryProvider(new Cesium.IonImageryProvider({ assetId: 4 }))
                 break
             case "百度地图":
-                var options = {
-                    style: 'dark', // style: img、vec、normal、dark
-                    crs: 'WGS84' // 使用84坐标系，默认为：BD09
-                }
-                this.viewer.imageryLayers.addImageryProvider(
-                    new Cesium.BaiduImageryProvider(options)
-                )
+                this.addImageryProvider(new Cesium.BaiduImageryProvider({
+                    style: 'dark',
+                    crs: 'WGS84'
+                }))
                 break
             case "腾讯地图":
-                var options = {
-                    style: 1 //style: img、1：经典
-                }
-
-                this.viewer.imageryLayers.addImageryProvider(
-                    new Cesium.TencentImageryProvider(options)
-                )
+                this.addImageryProvider(new Cesium.TencentImageryProvider({
+                    style: 1
+                }))
                 break
             case "天地图":
-                var options = {
-                    style: 'vec', //style: vec、cva、img、cia、ter
+                this.addImageryProvider(new Cesium.TdtImageryProvider({
+                    style: 'vec',
                     key: '4a00a1dc5387b8ed8adba3374bd87e5e'
-                }
-                this.viewer.imageryLayers.addImageryProvider(new Cesium.TdtImageryProvider(options))
+                }))
                 break
             case "高德地图":
-                var options = {
-                    style: 'img', // style: img、elec、cva
-                    crs: 'WGS84' // 使用84坐标系，默认为：GCJ02
-                }
-                this.viewer.imageryLayers.addImageryProvider(new Cesium.AmapImageryProvider(options))
-                break
-            case "谷歌地图":
-                Imagery = new Cesium.ArcGisMapServerImageryProvider({
-                    url: 'https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer',
-                    enablePickFeatures: false,
-                })
-                this.viewer.imageryLayers.addImageryProvider(Imagery)
+                this.addImageryProvider(new Cesium.AmapImageryProvider({
+                    style: 'img',
+                    crs: 'WGS84'
+                }))
                 break
         }
-
     }
 
     /**
