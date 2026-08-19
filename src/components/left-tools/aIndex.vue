@@ -1,48 +1,48 @@
 <template>
-    <div class="aindex-container ops-panel">
-        <div class="ops-panel__chrome">
-            <div class="ops-panel__title">
-                <span class="ops-panel__mark"></span>
-                场景控制
-            </div>
-            <div class="ops-panel__status">LIVE</div>
-        </div>
-        <el-tabs class="ops-tabs" :tab-position="tabPosition">
-            <el-tab-pane label="基础">
-                <basic></basic>
-            </el-tab-pane>
-            <el-tab-pane label="项目列表">
-                <ProjectList></ProjectList>
-            </el-tab-pane>
-            <el-tab-pane label="点状对象">
-                <PointObjects></PointObjects>
-            </el-tab-pane>
-            <el-tab-pane label="线状对象">
-                <LineObjects></LineObjects>
-            </el-tab-pane>
-            <el-tab-pane label="面状对象">
-                <PlaneObjects></PlaneObjects>
-            </el-tab-pane>
-            <el-tab-pane label="其他">
-                <DemoControls></DemoControls>
-            </el-tab-pane>
-            <el-tab-pane label="环境">
-                <EnvironmentControls></EnvironmentControls>
-            </el-tab-pane>
-            <el-tab-pane label="材质对象">
-                <MaterialObjects></MaterialObjects>
-            </el-tab-pane>
-            <el-tab-pane label="3D对象">
-                <Hello3d></Hello3d>
-            </el-tab-pane>
-            <el-tab-pane label="层数据">
-                <LeftTree></LeftTree>
-            </el-tab-pane>
-            <el-tab-pane label="数据拾取">
-                <panel></panel>
-            </el-tab-pane>
-        </el-tabs>
+  <div class="aindex-container ops-panel">
+    <div class="ops-panel__chrome">
+      <div class="ops-panel__title">
+        <span class="ops-panel__mark"></span>
+        场景控制
+      </div>
+      <div class="ops-panel__status">LIVE</div>
     </div>
+    <el-tabs class="ops-tabs" :tab-position="tabPosition">
+      <el-tab-pane label="基础">
+        <basic></basic>
+      </el-tab-pane>
+      <el-tab-pane label="项目列表">
+        <ProjectList></ProjectList>
+      </el-tab-pane>
+      <el-tab-pane label="点状对象">
+        <PointObjects></PointObjects>
+      </el-tab-pane>
+      <el-tab-pane label="线状对象">
+        <LineObjects></LineObjects>
+      </el-tab-pane>
+      <el-tab-pane label="面状对象">
+        <PlaneObjects></PlaneObjects>
+      </el-tab-pane>
+      <el-tab-pane label="其他">
+        <DemoControls></DemoControls>
+      </el-tab-pane>
+      <el-tab-pane label="环境">
+        <EnvironmentControls></EnvironmentControls>
+      </el-tab-pane>
+      <el-tab-pane label="材质对象">
+        <MaterialObjects></MaterialObjects>
+      </el-tab-pane>
+      <el-tab-pane label="3D对象">
+        <Hello3d></Hello3d>
+      </el-tab-pane>
+      <el-tab-pane label="层数据">
+        <LeftTree></LeftTree>
+      </el-tab-pane>
+      <el-tab-pane label="数据拾取">
+        <panel></panel>
+      </el-tab-pane>
+    </el-tabs>
+  </div>
 </template>
 
 <script>
@@ -59,25 +59,29 @@ import LeftTree from "@/components/left-tools/LeftTree";
 import Panel from "@/components/left-tools/Panel";
 
 export default {
-    components: {
-        Panel,
-        LeftTree,
-        Hello3d,
-        MaterialObjects,
-        EnvironmentControls, DemoControls, PlaneObjects, LineObjects, PointObjects, ProjectList, Basic
-    },
-    data() {
-        return {
-            tabPosition: 'left'
-        };
-    },
-    computed: {},
-    watch: {},
-    methods: {},
-    mounted() {
-
-    },
-}
+  components: {
+    Panel,
+    LeftTree,
+    Hello3d,
+    MaterialObjects,
+    EnvironmentControls,
+    DemoControls,
+    PlaneObjects,
+    LineObjects,
+    PointObjects,
+    ProjectList,
+    Basic,
+  },
+  data() {
+    return {
+      tabPosition: "left",
+    };
+  },
+  computed: {},
+  watch: {},
+  methods: {},
+  mounted() {},
+};
 </script>
 <style lang="scss">
 @import "./ops-theme";
