@@ -45,7 +45,7 @@
           v-model="flags[key]"
           :active-color="activeColor"
           :inactive-color="inactiveColor"
-          width="32"
+          :width="32"
           @change="handleSwitchChange(key)"
         ></el-switch>
       </div>
@@ -80,7 +80,7 @@
           v-model="clockFlag"
           :active-color="activeColor"
           :inactive-color="inactiveColor"
-          width="32"
+          :width="32"
           @change="clockChange"
         ></el-switch>
       </div>
@@ -112,7 +112,7 @@ export default {
         { value: "高德地图", label: "高德地图" },
         { value: "谷歌地图", label: "谷歌地图" },
       ],
-      optionsLayersIndex: "谷歌地图",
+      optionsLayersIndex: "高德卫星",
       modelData: null,
       modelDataList: [
         { value: "JSON闪光路", label: "JSON闪光路" },

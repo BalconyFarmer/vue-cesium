@@ -4,17 +4,17 @@
         <div class="ops-row">
             <span class="ops-row__label">流动线1</span>
             <el-switch v-model="lin1Flag" :active-color="activeColor" :inactive-color="inactiveColor"
-                       width="32" @change="lin1"></el-switch>
+                       :width="32" @change="lin1"></el-switch>
         </div>
         <div class="ops-row">
             <span class="ops-row__label">流动线2</span>
             <el-switch v-model="lin2Flag" :active-color="activeColor" :inactive-color="inactiveColor"
-                       width="32" @change="lin2"></el-switch>
+                       :width="32" @change="lin2"></el-switch>
         </div>
         <div class="ops-row">
             <span class="ops-row__label">3D流动线</span>
             <el-switch v-model="lin3Flag" :active-color="activeColor" :inactive-color="inactiveColor"
-                       width="32" @change="lin3"></el-switch>
+                       :width="32" @change="lin3"></el-switch>
         </div>
     </div>
 </template>

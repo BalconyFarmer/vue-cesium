@@ -4,27 +4,27 @@
         <div class="ops-row">
             <span class="ops-row__label">moveTip</span>
             <el-switch v-model="moveToolFlag" :active-color="activeColor" :inactive-color="inactiveColor"
-                       width="32" @change="moveToolTipsChange"></el-switch>
+                       :width="32" @change="moveToolTipsChange"></el-switch>
         </div>
         <div class="ops-row">
             <span class="ops-row__label">飞行飞机</span>
             <el-switch v-model="flyFlag" :active-color="activeColor" :inactive-color="inactiveColor"
-                       width="32" @change="fly"></el-switch>
+                       :width="32" @change="fly"></el-switch>
         </div>
         <div class="ops-row">
             <span class="ops-row__label">移动小人</span>
             <el-switch v-model="flyFlag1" :active-color="activeColor" :inactive-color="inactiveColor"
-                       width="32" @change="fly1"></el-switch>
+                       :width="32" @change="fly1"></el-switch>
         </div>
         <div class="ops-row">
             <span class="ops-row__label">移动小车</span>
             <el-switch v-model="flyFlag2" :active-color="activeColor" :inactive-color="inactiveColor"
-                       width="32" @change="fly2"></el-switch>
+                       :width="32" @change="fly2"></el-switch>
         </div>
         <div class="ops-row">
             <span class="ops-row__label">GPS</span>
             <el-switch v-model="GpsFlag" :active-color="activeColor" :inactive-color="inactiveColor"
-                       width="32" @change="GpsChange"></el-switch>
+                       :width="32" @change="GpsChange"></el-switch>
         </div>
     </div>
 </template>

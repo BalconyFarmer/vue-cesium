@@ -41,7 +41,7 @@
             <div class="ops-row">
                 <span class="ops-row__label">drag</span>
                 <el-switch v-model="switchValue" active-color="#6dff8a" inactive-color="#2c3d34"
-                           width="32" @change="dragChange"></el-switch>
+                           :width="32" @change="dragChange"></el-switch>
             </div>
         </div>
     </div>

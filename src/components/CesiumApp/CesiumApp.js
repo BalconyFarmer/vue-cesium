@@ -58,6 +58,8 @@ export default class CesiumApp {
                     alpha: true
                 }
             },
+            imageryProvider: false,
+            terrainProvider: new Cesium.EllipsoidTerrainProvider(),
             baseLayerPicker: true, // 如果设置为false,则不会创建BaseLayerPicker小部件。
             fullscreenButton: true, // 如果设置为false,将不会创建FullscreenButton小部件。
             vrButton: true, // 如果设置为true,将创建VRButton小部件。
@@ -445,7 +447,10 @@ export default class CesiumApp {
         let Imagery = null
 
         if (this.viewer) {
-            this.viewer.imageryLayers.removeAll() // 清除所有图层
+            const layers = this.viewer.imageryLayers
+            while (layers.length > 0) {
+                layers.remove(layers.get(0), false)
+            }
         }
 
         switch (data) {
@@ -537,15 +542,14 @@ export default class CesiumApp {
                     style: 'img', // style: img、elec、cva
                     crs: 'WGS84' // 使用84坐标系，默认为：GCJ02
                 }
-                viewer.imageryLayers.addImageryProvider(new Cesium.AmapImageryProvider(options))
+                this.viewer.imageryLayers.addImageryProvider(new Cesium.AmapImageryProvider(options))
                 break
             case "谷歌地图":
-                var options = {
-                    style: 'ter' //style: img、elec、ter
-                }
-                viewer.imageryLayers.addImageryProvider(
-                    new Cesium.GoogleImageryProvider(options)
-                )
+                Imagery = new Cesium.ArcGisMapServerImageryProvider({
+                    url: 'https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer',
+                    enablePickFeatures: false,
+                })
+                this.viewer.imageryLayers.addImageryProvider(Imagery)
                 break
         }
 

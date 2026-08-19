@@ -4,17 +4,17 @@
         <div class="ops-row">
             <span class="ops-row__label">雷达1</span>
             <el-switch v-model="radioFlag" :active-color="activeColor" :inactive-color="inactiveColor"
-                       width="32" @change="radioChange"></el-switch>
+                       :width="32" @change="radioChange"></el-switch>
         </div>
         <div class="ops-row">
             <span class="ops-row__label">雷达2</span>
             <el-switch v-model="radioFlag1" :active-color="activeColor" :inactive-color="inactiveColor"
-                       width="32" @change="radioChange1"></el-switch>
+                       :width="32" @change="radioChange1"></el-switch>
         </div>
         <div class="ops-row">
             <span class="ops-row__label">流动墙</span>
             <el-switch v-model="radioFlag2" :active-color="activeColor" :inactive-color="inactiveColor"
-                       width="32" @change="radioChange2"></el-switch>
+                       :width="32" @change="radioChange2"></el-switch>
         </div>
     </div>
 </template>
