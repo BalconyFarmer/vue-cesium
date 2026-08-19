@@ -18,7 +18,6 @@
 <script>
 export default {
   name: "PointObjects",
-  props: ["cApp"],
   data() {
     return {
       activeColor: "#6dff8a",
