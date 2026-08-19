@@ -17,8 +17,8 @@ export default class LoadJson {
             this.traceLayer = null
         } else {
             const self = this
-            // 还在geoJson数据 ()
-            Cesium.GeoJsonDataSource.load(this.app.staticServerAdress + URL).then(function (dataSource) {
+            const source = URL === '/geoJson/xsbn.json' ? xsbnjson : (URL ? this.app.staticServerAdress + URL : yn)
+            Cesium.GeoJsonDataSource.load(source).then(function (dataSource) {
                 self.app.viewer.dataSources.add(dataSource).then(res => {
                     const entities = dataSource.entities.values;
                     const colorHash = {};

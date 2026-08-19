@@ -5,12 +5,12 @@
  * https://blog.csdn.net/weixin_42443851/article/details/103871260
  */
 export default class CustomShaderTest {
-    constructor (app) {
+    constructor(app) {
         this.app = app
         this.init()
     }
 
-    init () {
+    init() {
         //平面的顶点数据
         let points = [
             110.2, 20.0,
@@ -35,12 +35,12 @@ export default class CustomShaderTest {
         ]
 
         // 定点着色器
-        function v_shader () {
-            return 'attribute vec3 position3DHigh;\n' +
-                'attribute vec3 position3DLow;\n' +
-                'attribute float batchId;\n' +
-                'attribute vec2 st;\n' +
-                'varying vec2 v_st;\n' +
+        function v_shader() {
+            return 'in vec3 position3DHigh;\n' +
+                'in vec3 position3DLow;\n' +
+                'in float batchId;\n' +
+                'in vec2 st;\n' +
+                'out vec2 v_st;\n' +
                 'void main() {\n' +
                 '   vec4 position = czm_modelViewProjectionRelativeToEye *czm_computePosition();\n' +
                 '   v_st = st;\n' +
@@ -49,9 +49,8 @@ export default class CustomShaderTest {
         }
 
         // 面着色器
-        function f_shader () {
-            return 'varying vec2 v_st;\n' +
-                '//uniform float speed;\n' +
+        function f_shader() {
+            return 'in vec2 v_st;\n' +
                 'void main() {\n' +
                 '   vec2 position = -1.0 + 2.0 *v_st;\n' +
                 '   float speed = getSpeed();\n' +
@@ -59,11 +58,11 @@ export default class CustomShaderTest {
                 '   float r = abs( cos( position.x * position.y + time / 5.0 ));\n' +
                 '   float g = abs( sin( position.x * position.y + time / 4.0 ) );\n' +
                 '   float b = abs( cos( position.x * position.y + time / 3.0 ) );\n' +
-                '   gl_FragColor = vec4( r, g, b, 1.0 );\n' +
+                '   out_FragColor = vec4( r, g, b, 1.0 );\n' +
                 '}\n'
         }
 
-        function getMS () {
+        function getMS() {
             return 'uniform float speed;\n' +
                 'float getSpeed(){\n' +
                 '   return speed;\n' +
@@ -71,7 +70,7 @@ export default class CustomShaderTest {
         }
 
         //构建几何体
-        function createGeometry (positions, sts, positionIndex) {
+        function createGeometry(positions, sts, positionIndex) {
             return new Cesium.Geometry({
                 attributes: {//几何顶点属性
                     position: new Cesium.GeometryAttribute({
@@ -96,9 +95,9 @@ export default class CustomShaderTest {
                 material: new Cesium.Material({
                     fabric: {
                         uniforms: {
-                            speed:0.1
+                            speed: 0.1
                         },
-                        source:getMS()
+                        source: getMS()
                     }
                 }),
                 translucent: false,//显示不为半透明
@@ -112,7 +111,7 @@ export default class CustomShaderTest {
             });
         }
 
-        function primitivePlaneShaer (options) {
+        function primitivePlaneShaer(options) {
             let viewer = options.viewer
             let vertexShader = v_shader()
             let fragShader = f_shader()
