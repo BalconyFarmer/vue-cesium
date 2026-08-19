@@ -108,7 +108,7 @@ export default {
         { value: "ArcGis实景图层", label: "ArcGis实景图层" },
         { value: "纯黑", label: "纯黑" },
       ],
-      optionsLayersIndex: "天地图",
+      optionsLayersIndex: "geoq智图黑",
       modelData: null,
       modelDataList: [
         { value: "JSON闪光路", label: "JSON闪光路" },
