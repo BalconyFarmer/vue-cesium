@@ -3,6 +3,7 @@ import CustomStyle from './some/ShaderDemo/CustomStyle/CustomMaterial/CustomStyl
 import ObliquePhotography from './some/ObliquePhotography/ObliquePhotography'
 import Cesium3DTileset from './some/Cesium3DTileset/Cesium3DTileset'
 import LoadJson from './some/LoadJson'
+import BaseLayer from './some/BaseLayer'
 import Load3DModel from './some/Load3DModel'
 import InnerGeometry from './some/InnerGeometry/InnerGeometry'
 import Event from './some/Event'
@@ -21,8 +22,6 @@ import Train from "@/components/CesiumApp/some/Train";
 import Clock from "@/components/CesiumApp/some/Clock";
 import GPSlocation from "@/components/CesiumApp/some/GPSlocation";
 
-require('@dvgis/cesium-map')  //国内底图工具
-
 export default class CesiumApp {
     constructor() {
         this.staticServerAdress = apiRoot + '/3Dstatic/loadData'
@@ -33,6 +32,7 @@ export default class CesiumApp {
         this.obliquePhotography = new ObliquePhotography(this)
         this.cesium3DTileset = new Cesium3DTileset(this)
         this.loadJson = new LoadJson(this)
+        this.baseLayer = new BaseLayer(this)
         this.load3DModel = new Load3DModel(this)
         this.innerGeometry = new InnerGeometry(this)
         this.innerMaterial = new InnerMaterial(this)
@@ -88,7 +88,7 @@ export default class CesiumApp {
         this.viewer.scene.postProcessStages.fxaa.enabled = true// 去锯齿 是文字清晰
         this.animation = new Animation(this)
 
-        this.switchLayer('高德卫星')
+        this.baseLayer.switchLayer('高德卫星')
         this.points = new KMLPoints(this)
         this.pointsCluster = new PointsCluster(this)
         this.primitivePoints = new PrimitivesPoints(this)
@@ -102,7 +102,7 @@ export default class CesiumApp {
 
 
     runXSBN() {
-        this.switchLayer('geoq智图黑')
+        this.baseLayer.switchLayer('geoq智图黑')
         this.addTimeAction()
         this.rollCircle()
     }
@@ -172,6 +172,7 @@ export default class CesiumApp {
 
     }
 
+    // 华盛顿IMG
     huashengdunImg() {
         const aim = {
             x: 1159794.7520092668,
@@ -182,13 +183,17 @@ export default class CesiumApp {
             roll: 6.283171427164341,
         }
         this.cameraFlyToCartesian3(aim)
-        // 哥伦比亚特区的 3 英寸/0.08 米像素分辨率图像，覆盖约 69 平方英里
-        let _a = new Cesium.IonImageryProvider({ assetId: 3827 })
-        _a.name = "华盛顿"
-        const layer = viewer.imageryLayers.addImageryProvider(
-            _a
-        );
 
+        const add = (provider) => {
+            if (!provider) return
+            provider.name = '华盛顿'
+            this.baseLayer.addImageryProvider(provider)
+        }
+        if (Cesium.IonImageryProvider.fromAssetId) {
+            Cesium.IonImageryProvider.fromAssetId(3827).then(add)
+            return
+        }
+        add(new Cesium.IonImageryProvider({ assetId: 3827 }))
     }
 
 
@@ -440,102 +445,6 @@ export default class CesiumApp {
     // 清除Entitys
     clearEntities() {
         this.viewer.entities.removeAll()
-    }
-
-    clearImageryLayers() {
-        if (!this.viewer) return
-        const layers = this.viewer.imageryLayers
-        while (layers.length > 0) {
-            layers.remove(layers.get(0), false)
-        }
-    }
-
-    addImageryProvider(provider) {
-        if (!this.viewer || !provider) return
-        const viewer = this.viewer
-        const add = () => {
-            if (this.viewer !== viewer) return
-            viewer.imageryLayers.addImageryProvider(provider)
-        }
-        if (provider.ready) {
-            add()
-            return
-        }
-        if (provider.readyPromise) {
-            provider.readyPromise.then(add)
-            return
-        }
-        add()
-    }
-
-    // 切换底图
-    switchLayer(data) {
-        this.clearImageryLayers()
-
-        switch (data) {
-            case 'ArcGis实景图层':
-                // ArcGisMapServer 要先拉元数据，没 ready 时 _resource 是空的会把渲染打崩
-                this.addImageryProvider(new Cesium.UrlTemplateImageryProvider({
-                    url: 'https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
-                    maximumLevel: 18
-                }))
-                break
-            case 'geoq智图黑':
-                this.addImageryProvider(new Cesium.UrlTemplateImageryProvider({
-                    url: 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png',
-                    subdomains: ['a', 'b', 'c', 'd'],
-                    maximumLevel: 18
-                }))
-                break
-            /**
-             * 无国外影像,国内部分无数据
-             */
-            case '高德卫星':
-                this.addImageryProvider(new Cesium.UrlTemplateImageryProvider({
-                    url: 'https://webst02.is.autonavi.com/appmaptile?style=6&x={x}&y={y}&z={z}',
-                    minimumLevel: 3,
-                    maximumLevel: 18,
-                }))
-                this.addImageryProvider(new Cesium.UrlTemplateImageryProvider({
-                    url: 'http://webst02.is.autonavi.com/appmaptile?x={x}&y={y}&z={z}&lang=zh_cn&size=1&scale=1&style=8',
-                    minimumLevel: 3,
-                    maximumLevel: 18,
-                }))
-                break
-
-            case '纯黑':
-                this.viewer.scene.globe.baseColor = Cesium.Color.BLACK
-                break
-
-            case "百度地图":
-                this.addImageryProvider(new Cesium.BaiduImageryProvider({
-                    style: 'dark',
-                    crs: 'WGS84'
-                }))
-                break
-
-            case "腾讯地图":
-                this.addImageryProvider(new Cesium.TencentImageryProvider({
-                    style: 1
-                }))
-                break
-
-            case "天地图": {
-                const tdtKey = '4a00a1dc5387b8ed8adba3374bd87e5e'
-                const tdtSub = ['0', '1', '2', '3', '4', '5', '6', '7']
-                this.addImageryProvider(new Cesium.UrlTemplateImageryProvider({
-                    url: 'https://t{s}.tianditu.gov.cn/DataServer?T=vec_w&x={x}&y={y}&l={z}&tk=' + tdtKey,
-                    subdomains: tdtSub,
-                    maximumLevel: 18
-                }))
-                this.addImageryProvider(new Cesium.UrlTemplateImageryProvider({
-                    url: 'https://t{s}.tianditu.gov.cn/DataServer?T=cva_w&x={x}&y={y}&l={z}&tk=' + tdtKey,
-                    subdomains: tdtSub,
-                    maximumLevel: 18
-                }))
-                break
-            }
-        }
     }
 
     /**

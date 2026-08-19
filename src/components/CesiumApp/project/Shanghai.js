@@ -8,7 +8,7 @@ export default class Shanghai {
     }
 
     init() {
-        this.app.switchLayer('百度地图')
+        this.app.baseLayer.switchLayer('百度地图')
         this.app.loadJson.loadJsonRoad()
         this.app.addLight()
         this.app.addBloom()
@@ -83,7 +83,7 @@ export default class Shanghai {
 
         const width = 200
         // let position = Cesium.Cartesian3.fromDegrees(121.49912730591835,31.24096160638086, 0);
-        let position = new Cesium.Cartesian3 (-2851497.870388521, 4654042.248114797, 3288857.538218938)
+        let position = new Cesium.Cartesian3(-2851497.870388521, 4654042.248114797, 3288857.538218938)
         let entity = viewer.entities.add({
             position: position,
             box: {

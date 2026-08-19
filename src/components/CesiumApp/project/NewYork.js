@@ -14,7 +14,7 @@ export default class NewYork {
         this.app.cesium3DTileset.toYN()
 
         const self = this
-        this.app.switchLayer('ArcGis实景图层')
+        this.app.baseLayer.switchLayer('ArcGis实景图层')
         this.app.addLight()
         this.app.addBloom()
 
@@ -41,7 +41,7 @@ export default class NewYork {
         self.app.part.addFlowWall(postis)
 
         // 垂直流动线
-        let _points = turf.randomPoint(20, {bbox: [-73.99622283378928,40.70228738303501, -73.93445523237683,40.72801511088451,]});
+        let _points = turf.randomPoint(20, { bbox: [-73.99622283378928, 40.70228738303501, -73.93445523237683, 40.72801511088451,] });
         _points.features.forEach(item => {
             const points = [item.geometry.coordinates[0], item.geometry.coordinates[1], 0, item.geometry.coordinates[0], item.geometry.coordinates[1], 500,]
             self.app.part.addFlowLine(points)
@@ -58,11 +58,11 @@ export default class NewYork {
         self.app.innerGeometry.addIconBackground(p3, '11', 3)
 
         // 3D曲线
-        let center = {lon: -73.97041132537504, lat: 40.70616824536892,}
+        let center = { lon: -73.97041132537504, lat: 40.70616824536892, }
 
         let cities = [
-            {'lon': -73.96303919879395, 'lat': 40.71032473293702,},
-            {'lon': -73.96999337911545, 'lat': 40.71335210350552,},]
+            { 'lon': -73.96303919879395, 'lat': 40.71032473293702, },
+            { 'lon': -73.96999337911545, 'lat': 40.71335210350552, },]
         this.app.part.addFlyLine3D(center, cities)
 
 

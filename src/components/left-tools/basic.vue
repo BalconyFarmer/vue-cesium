@@ -159,7 +159,7 @@ export default {
       if (this.cApp) this.cApp.switchViewMode(this.value);
     },
     optionsLayersIndex(newValue) {
-      if (this.cApp) this.cApp.switchLayer(this.optionsLayersIndex);
+      if (this.cApp) this.cApp.baseLayer.switchLayer(this.optionsLayersIndex);
     },
     modelData(newValue) {
       if (this.cApp) this.loadModelData(this.modelData);
