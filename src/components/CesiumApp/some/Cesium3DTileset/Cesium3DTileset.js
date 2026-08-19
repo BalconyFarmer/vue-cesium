@@ -28,10 +28,6 @@ export default class Cesium3DTileset {
             })
         );
 
-        // const see = tileset
-        // console.log(see)
-        // debugger
-
         tileset.style = new Cesium.Cesium3DTileStyle({
             color: {
                 conditions: [
