@@ -474,7 +474,6 @@ export default class CesiumApp {
 
         switch (data) {
             case 'ArcGis实景图层':
-            case "谷歌地图":
                 // ArcGisMapServer 要先拉元数据，没 ready 时 _resource 是空的会把渲染打崩
                 this.addImageryProvider(new Cesium.UrlTemplateImageryProvider({
                     url: 'https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
@@ -483,7 +482,8 @@ export default class CesiumApp {
                 break
             case 'geoq智图黑':
                 this.addImageryProvider(new Cesium.UrlTemplateImageryProvider({
-                    url: 'https://map.geoq.cn/ArcGIS/rest/services/ChinaOnlineStreetPurplishBlue/MapServer/tile/{z}/{y}/{x}',
+                    url: 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png',
+                    subdomains: ['a', 'b', 'c', 'd'],
                     maximumLevel: 18
                 }))
                 break
@@ -507,33 +507,23 @@ export default class CesiumApp {
                 this.viewer.scene.globe.baseColor = Cesium.Color.BLACK
                 break
 
-            case 'BING':
-                this.addImageryProvider(new Cesium.IonImageryProvider({ assetId: 3 }))
-                break
-            case 'BING道路':
-                this.addImageryProvider(new Cesium.IonImageryProvider({ assetId: 4 }))
-                break
             case "百度地图":
                 this.addImageryProvider(new Cesium.BaiduImageryProvider({
                     style: 'dark',
                     crs: 'WGS84'
                 }))
                 break
+
             case "腾讯地图":
                 this.addImageryProvider(new Cesium.TencentImageryProvider({
                     style: 1
                 }))
                 break
+
             case "天地图":
                 this.addImageryProvider(new Cesium.TdtImageryProvider({
                     style: 'vec',
                     key: '4a00a1dc5387b8ed8adba3374bd87e5e'
-                }))
-                break
-            case "高德地图":
-                this.addImageryProvider(new Cesium.AmapImageryProvider({
-                    style: 'img',
-                    crs: 'WGS84'
                 }))
                 break
         }
@@ -546,7 +536,6 @@ export default class CesiumApp {
     updateLyerLight(alpha, brightness) {
         this.viewer.imageryLayers._layers[0].alpha = alpha// 透明度
         this.viewer.imageryLayers._layers[0].brightness = brightness// 亮度
-        console.log(this.viewer.imageryLayers, '++++++++++++++++++++')
     }
 
     /**
