@@ -7,7 +7,7 @@
            color 颜色
            duration 持续时间 毫秒
         */
-    function FlowLineMaterialProperty (color, duration) {
+    function FlowLineMaterialProperty(color, duration) {
         this._definitionChanged = new Cesium.Event()
         this._color = undefined
         this._colorSubscription = undefined
@@ -53,7 +53,7 @@
                                                   {\n\
                                                        czm_material material = czm_getDefaultMaterial(materialInput);\n\
                                                        vec2 st = materialInput.st;\n\
-                                                       vec4 colorImage = texture2D(image, vec2(fract(st.s), st.t));\n\
+                                                       vec4 colorImage = texture(image, vec2(fract(st.s), st.t));\n\
                                                        material.alpha = colorImage.a * color.a;\n\
                                                        material.diffuse = colorImage.rgb;\n\
                                                        return material;\n\
@@ -73,7 +73,7 @@
         }
     })
 
-    function drawCanvas () {
+    function drawCanvas() {
         let canvas = document.createElement('canvas')
         canvas.width = 1200
         canvas.height = 50

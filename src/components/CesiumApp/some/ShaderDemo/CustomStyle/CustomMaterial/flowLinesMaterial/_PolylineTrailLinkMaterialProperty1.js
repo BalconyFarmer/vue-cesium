@@ -63,7 +63,7 @@ function initFlowMatetial1 (imgUrl) {
                                                       {\n\
                                                            czm_material material = czm_getDefaultMaterial(materialInput);\n\
                                                            vec2 st = materialInput.st;\n\
-                                                           vec4 colorImage = texture2D(image, st.t , vec2(fract(st.s - time)));\n\
+                                                           vec4 colorImage = texture(image, vec2(fract(st.s - time), st.t));\n\
                                                            material.alpha = colorImage.a * color.a;\n\
                                                            material.diffuse = (colorImage.rgb+color.rgb)/2.0;\n\
                                                            return material;\n\
