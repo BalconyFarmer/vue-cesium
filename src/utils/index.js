@@ -8,8 +8,8 @@ export function scriptLoader(url) {
         script.moduleName = url;
         script.onerror = reject;
         document.body.appendChild(script);
-        script.onload = script.onreadystatechange = function() {
-            if(!this.readyState || this.readyState === "loaded" || this.readyState === "complete") {
+        script.onload = script.onreadystatechange = function () {
+            if (!this.readyState || this.readyState === "loaded" || this.readyState === "complete") {
                 resolve();
                 script.onload = script.onreadystatechange = null;
             }
