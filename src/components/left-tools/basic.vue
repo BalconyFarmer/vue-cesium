@@ -174,35 +174,29 @@ export default {
       }
     },
     handleSwitchChange(key) {
-      const methodMap = {
-        changeGlobleLightFlag: "switchLight",
-        changeLightFlag: "addLight",
-        changeShadowFlag: "changeShadow",
-        terrainFlag: "toggleTerrain",
-      };
-      if (this.cApp) this.cApp[methodMap[key]]();
+      if (!this.cApp) return;
+      if (key === "changeGlobleLightFlag") this.cApp.switchLight();
+      else if (key === "changeLightFlag") this.cApp.addLight();
+      else if (key === "changeShadowFlag") this.cApp.changeShadow();
+      else if (key === "terrainFlag") this.toggleTerrain();
     },
     handleSelect(key) {
-      const methodMap = {
-        addBloom: "addBloom",
-        addOutline: "addOutline",
-        14: "closeAll",
-        动画组件: "clock.closeAimationToolbar",
-      };
-      if (this.cApp) this.cApp[methodMap[key]]();
+      if (!this.cApp) return;
+      if (key === "addBloom") this.cApp.addBloom();
+      else if (key === "addOutline") this.cApp.addOutline();
+      else if (key === "14") this.cApp.closeAll();
+      else if (key === "动画组件") this.cApp.clock.closeAimationToolbar();
     },
     loadModelData(key) {
-      const methodMap = {
-        JSON闪光路: "loadJson.loadJsonRoad",
-        西双版纳JSON掩模: "loadJson.loadJsonYanMo",
-        西双版纳JSON: "addTimeAction",
-        云南JSON: "loadJson.loadJsonData",
-        纽约tiles: "cesium3DTileset.toYN",
-        倾斜摄影: "obliquePhotography.addOblique",
-        华盛顿IMG: "huashengdunImg",
-        OSM建筑: "addOSMBuilding",
-      };
-      if (this.cApp) this.cApp[methodMap[key]]();
+      if (!this.cApp) return;
+      if (key === "JSON闪光路") this.cApp.loadJson.loadJsonRoad();
+      else if (key === "西双版纳JSON掩模") this.cApp.loadJson.loadJsonYanMo();
+      else if (key === "西双版纳JSON") this.cApp.addTimeAction();
+      else if (key === "云南JSON") this.cApp.loadJson.loadJsonData();
+      else if (key === "纽约tiles") this.cApp.cesium3DTileset.toYN();
+      else if (key === "倾斜摄影") this.cApp.obliquePhotography.addOblique();
+      else if (key === "华盛顿IMG") this.cApp.huashengdunImg();
+      else if (key === "OSM建筑") this.cApp.addOSMBuilding();
     },
     toggleTerrain() {
       if (this.flags.terrainFlag) this.cApp.addTerrain();
