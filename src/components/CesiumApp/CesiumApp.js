@@ -520,12 +520,21 @@ export default class CesiumApp {
                 }))
                 break
 
-            case "天地图":
-                this.addImageryProvider(new Cesium.TdtImageryProvider({
-                    style: 'vec',
-                    key: '4a00a1dc5387b8ed8adba3374bd87e5e'
+            case "天地图": {
+                const tdtKey = '4a00a1dc5387b8ed8adba3374bd87e5e'
+                const tdtSub = ['0', '1', '2', '3', '4', '5', '6', '7']
+                this.addImageryProvider(new Cesium.UrlTemplateImageryProvider({
+                    url: 'https://t{s}.tianditu.gov.cn/DataServer?T=vec_w&x={x}&y={y}&l={z}&tk=' + tdtKey,
+                    subdomains: tdtSub,
+                    maximumLevel: 18
+                }))
+                this.addImageryProvider(new Cesium.UrlTemplateImageryProvider({
+                    url: 'https://t{s}.tianditu.gov.cn/DataServer?T=cva_w&x={x}&y={y}&l={z}&tk=' + tdtKey,
+                    subdomains: tdtSub,
+                    maximumLevel: 18
                 }))
                 break
+            }
         }
     }
 
