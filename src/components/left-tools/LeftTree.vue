@@ -1,21 +1,24 @@
 <template>
-    <div class="leftTree glass">
-
-        <div>
-            <div>图层</div>
-
-            <div v-for="item in layersData" :key="item.name">
-                {{ item.name }}
+    <div class="ops-stack">
+        <div class="ops-section">
+            <div class="ops-section__title">图层</div>
+            <div v-if="!layersData.length" class="ops-empty">暂无图层</div>
+            <div v-else class="ops-list">
+                <div v-for="item in layersData" :key="item.name" class="ops-list__item">
+                    {{ item.name }}
+                </div>
             </div>
         </div>
-
-        <div>
-            <div>实体</div>
-            <div v-for="item in treeData" :key="item.name">
-                {{ item.name }}
+        <div class="ops-section">
+            <div class="ops-section__title">实体</div>
+            <div v-if="!treeData.length" class="ops-empty">暂无实体</div>
+            <div v-else class="ops-list">
+                <div v-for="item in treeData" :key="item.id || item.name" class="ops-list__item"
+                     @click="handleNodeClick({ label: item.name })">
+                    {{ item.name || item.id }}
+                </div>
             </div>
         </div>
-
     </div>
 </template>
 
@@ -72,20 +75,3 @@ export default {
     }
 }
 </script>
-
-<style lang="scss" scoped>
-.leftTree {
-    width: 50%;
-    height: 100%;
-    background-color: rgba(43, 43, 43, .9);
-    color: white;
-    overflow-y: auto;
-    padding: 10px;
-
-    .leftTreeMenu {
-        display: flex;
-        justify-content: space-around;
-        margin-bottom: 10px;
-    }
-}
-</style>

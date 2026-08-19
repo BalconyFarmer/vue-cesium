@@ -1,11 +1,13 @@
 <template>
-    <div class="env">
-        <div v-for="(label, key) in switches" :key="key">
-            <span>{{ label }}</span>
+    <div class="ops-section">
+        <div class="ops-section__title">点状对象</div>
+        <div v-for="(label, key) in switches" :key="key" class="ops-row">
+            <span class="ops-row__label">{{ label }}</span>
             <el-switch
                 v-model="flags[key]"
-                active-color="#13ce66"
-                inactive-color="#2B2B2B"
+                :active-color="activeColor"
+                :inactive-color="inactiveColor"
+                width="32"
                 @change="handleSwitchChange(key)">
             </el-switch>
         </div>
@@ -18,6 +20,8 @@ export default {
     props: ['cApp'],
     data() {
         return {
+            activeColor: '#6dff8a',
+            inactiveColor: '#2c3d34',
             switches: {
                 kmlFlag: 'KML点聚合',
                 normalPointsClusterChangeFlag: '通用点聚合',
@@ -88,16 +92,3 @@ export default {
     }
 };
 </script>
-
-<style scoped>
-.env {
-    width: 100%;
-    height: 30%;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    flex-wrap: wrap;
-    overflow-x: auto;
-    margin: 20px;
-}
-</style>

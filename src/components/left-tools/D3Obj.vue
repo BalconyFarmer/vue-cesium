@@ -1,37 +1,34 @@
 <template>
-    <div class="all">
-        <el-tabs v-model="activeName">
-            <el-tab-pane label="3D对象" name="first">
-                <div class="geo">
-                    <div class="normal b" @mousedown="mouseDown('bilbord')">bilbord</div>
-                    <div class="normal addIconBackground" @mousedown="mouseDown('addIconBackground')">bilbordBG</div>
-                    <div class="normal ParticalSys" @mousedown="mouseDown('ParticalSys')">TT</div>
-                    <div class="normal p" @mousedown="mouseDown('点')">TT</div>
-                    <div class="normal Box" @mousedown="mouseDown('Box')">TT</div>
-                    <div class="normal addEllipse" @mousedown="mouseDown('addEllipse')">TT</div>
-                    <div class="normal addEllipseTuo" @mousedown="mouseDown('addEllipseTuo')">TT</div>
-                    <div class="normal addEllipseTuoWW" @mousedown="mouseDown('addEllipseTuoWW')">TT</div>
-                    <div class="normal y" @mousedown="mouseDown('圆柱体')">TT</div>
-                    <div class="normal glowingLine" @mousedown="mouseDown('glowingLine')">TT</div>
-                    <div class="normal orangeOutlined" @mousedown="mouseDown('orangeOutlined')">TT</div>
-                    <div class="normal yellowLine" @mousedown="mouseDown('yellowLine')">TT</div>
-                    <div class="normal redRectangle" @mousedown="mouseDown('redRectangle')">TT</div>
-                    <div class="normal greenRectangle" @mousedown="mouseDown('greenRectangle')">TT</div>
-                    <div class="normal blueEllipsoid" @mousedown="mouseDown('blueEllipsoid')">TT</div>
-                    <div class="normal redSphere" @mousedown="mouseDown('redSphere')">TT</div>
-                    <div class="normal outlineOnly" @mousedown="mouseDown('outlineOnly')">TT</div>
-                    <div class="normal redWall" @mousedown="mouseDown('redWall')">TT</div>
-                    <div class="normal greenWall" @mousedown="mouseDown('greenWall')">TT</div>
-                    <div class="normal blueWall" @mousedown="mouseDown('blueWall')">TT</div>
-                    <div class="normal redCorridor" @mousedown="mouseDown('redCorridor')">TT</div>
-                    <div class="normal redPolygon" @mousedown="mouseDown('redPolygon')">TT</div>
-                    <div class="normal greenPolygon" @mousedown="mouseDown('greenPolygon')">TT</div>
-                    <div class="normal orangePolygon" @mousedown="mouseDown('orangePolygon')">TT</div>
-                    <div class="normal bluePolygon" @mousedown="mouseDown('bluePolygon')">TT</div>
-                    <div class="normal redLine" @mousedown="mouseDown('redLine')">TT</div>
-                </div>
-            </el-tab-pane>
-        </el-tabs>
+    <div class="ops-section">
+        <div class="ops-section__title">3D对象</div>
+        <div class="ops-tiles">
+            <div class="ops-tile b" title="bilbord" @mousedown="mouseDown('bilbord')"></div>
+            <div class="ops-tile addIconBackground" title="bilbordBG" @mousedown="mouseDown('addIconBackground')"></div>
+            <div class="ops-tile ParticalSys" title="粒子" @mousedown="mouseDown('ParticalSys')"></div>
+            <div class="ops-tile p" title="点" @mousedown="mouseDown('点')"></div>
+            <div class="ops-tile Box" title="Box" @mousedown="mouseDown('Box')"></div>
+            <div class="ops-tile addEllipse" title="椭圆" @mousedown="mouseDown('addEllipse')"></div>
+            <div class="ops-tile addEllipseTuo" title="椭圆体" @mousedown="mouseDown('addEllipseTuo')"></div>
+            <div class="ops-tile addEllipseTuoWW" title="椭圆体外轮廓" @mousedown="mouseDown('addEllipseTuoWW')"></div>
+            <div class="ops-tile y" title="圆柱体" @mousedown="mouseDown('圆柱体')"></div>
+            <div class="ops-tile glowingLine" title="发光线" @mousedown="mouseDown('glowingLine')"></div>
+            <div class="ops-tile orangeOutlined" title="橙色轮廓" @mousedown="mouseDown('orangeOutlined')"></div>
+            <div class="ops-tile yellowLine" title="黄线" @mousedown="mouseDown('yellowLine')"></div>
+            <div class="ops-tile redRectangle" title="红矩形" @mousedown="mouseDown('redRectangle')"></div>
+            <div class="ops-tile greenRectangle" title="绿矩形" @mousedown="mouseDown('greenRectangle')"></div>
+            <div class="ops-tile blueEllipsoid" title="蓝椭球" @mousedown="mouseDown('blueEllipsoid')"></div>
+            <div class="ops-tile redSphere" title="红球" @mousedown="mouseDown('redSphere')"></div>
+            <div class="ops-tile outlineOnly" title="仅轮廓" @mousedown="mouseDown('outlineOnly')"></div>
+            <div class="ops-tile redWall" title="红墙" @mousedown="mouseDown('redWall')"></div>
+            <div class="ops-tile greenWall" title="绿墙" @mousedown="mouseDown('greenWall')"></div>
+            <div class="ops-tile blueWall" title="蓝墙" @mousedown="mouseDown('blueWall')"></div>
+            <div class="ops-tile redCorridor" title="红走廊" @mousedown="mouseDown('redCorridor')"></div>
+            <div class="ops-tile redPolygon" title="红多边形" @mousedown="mouseDown('redPolygon')"></div>
+            <div class="ops-tile greenPolygon" title="绿多边形" @mousedown="mouseDown('greenPolygon')"></div>
+            <div class="ops-tile orangePolygon" title="橙多边形" @mousedown="mouseDown('orangePolygon')"></div>
+            <div class="ops-tile bluePolygon" title="蓝多边形" @mousedown="mouseDown('bluePolygon')"></div>
+            <div class="ops-tile redLine" title="红线" @mousedown="mouseDown('redLine')"></div>
+        </div>
     </div>
 </template>
 
@@ -180,30 +177,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.all {
-    width: 100%;
-    height: 100%;
-    background-color: rgba(43, 43, 43, .5);
-
-    .env, .geo, .material {
-        width: 100%;
-        height: 30%;
-        display: flex;
-        flex-direction: row;
-        justify-content: flex-start;
-        flex-wrap: wrap;
-        overflow-x: auto;
-    }
-
-    .normal {
-        width: 50px;
-        height: 50px;
-        margin: 5px;
-        border: 1px solid yellow;
-        cursor: pointer;
-    }
-
-    .addEllipseTuoWW {
+.addEllipseTuoWW {
         background-image: url("../../assets/geometryIcons/addEllipseTuoWW.png");
         background-size: 100% 100%;
     }
@@ -358,9 +332,8 @@ export default {
         background-size: 100% 100%;
     }
 
-    .redLine {
-        background-image: url("../../assets/geometryIcons/redLine.png");
-        background-size: 100% 100%;
-    }
+.redLine {
+    background-image: url("../../assets/geometryIcons/redLine.png");
+    background-size: 100% 100%;
 }
 </style>

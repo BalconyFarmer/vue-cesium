@@ -1,33 +1,20 @@
 <template>
-    <div class="line-objects">
-        <div class="env">
-            <div>
-                <span>流动线1</span>
-                <el-switch
-                    v-model="lin1Flag"
-                    active-color="#13ce66"
-                    inactive-color="#2B2B2B"
-                    @change="lin1">
-                </el-switch>
-            </div>
-            <div>
-                <span>流动线2</span>
-                <el-switch
-                    v-model="lin2Flag"
-                    active-color="#13ce66"
-                    inactive-color="#2B2B2B"
-                    @change="lin2">
-                </el-switch>
-            </div>
-            <div>
-                <span>3D流动线</span>
-                <el-switch
-                    v-model="lin3Flag"
-                    active-color="#13ce66"
-                    inactive-color="#2B2B2B"
-                    @change="lin3">
-                </el-switch>
-            </div>
+    <div class="ops-section">
+        <div class="ops-section__title">线状对象</div>
+        <div class="ops-row">
+            <span class="ops-row__label">流动线1</span>
+            <el-switch v-model="lin1Flag" :active-color="activeColor" :inactive-color="inactiveColor"
+                       width="32" @change="lin1"></el-switch>
+        </div>
+        <div class="ops-row">
+            <span class="ops-row__label">流动线2</span>
+            <el-switch v-model="lin2Flag" :active-color="activeColor" :inactive-color="inactiveColor"
+                       width="32" @change="lin2"></el-switch>
+        </div>
+        <div class="ops-row">
+            <span class="ops-row__label">3D流动线</span>
+            <el-switch v-model="lin3Flag" :active-color="activeColor" :inactive-color="inactiveColor"
+                       width="32" @change="lin3"></el-switch>
         </div>
     </div>
 </template>
@@ -37,6 +24,8 @@ export default {
     name: 'LineObjects',
     data() {
         return {
+            activeColor: '#6dff8a',
+            inactiveColor: '#2c3d34',
             lin1Flag: false,
             lin2Flag: false,
             lin3Flag: false,
@@ -77,11 +66,3 @@ export default {
     }
 }
 </script>
-
-<style scoped>
-.line-objects .env {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-</style>

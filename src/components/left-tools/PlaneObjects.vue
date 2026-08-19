@@ -1,32 +1,20 @@
-<!-- SurfaceObjects.vue -->
 <template>
-    <div class="env">
-        <div>
-            <span>雷达1</span>
-            <el-switch
-                v-model="radioFlag"
-                active-color="#13ce66"
-                inactive-color="#2B2B2B"
-                @change="radioChange">
-            </el-switch>
+    <div class="ops-section">
+        <div class="ops-section__title">面状对象</div>
+        <div class="ops-row">
+            <span class="ops-row__label">雷达1</span>
+            <el-switch v-model="radioFlag" :active-color="activeColor" :inactive-color="inactiveColor"
+                       width="32" @change="radioChange"></el-switch>
         </div>
-        <div>
-            <span>雷达2</span>
-            <el-switch
-                v-model="radioFlag1"
-                active-color="#13ce66"
-                inactive-color="#2B2B2B"
-                @change="radioChange1">
-            </el-switch>
+        <div class="ops-row">
+            <span class="ops-row__label">雷达2</span>
+            <el-switch v-model="radioFlag1" :active-color="activeColor" :inactive-color="inactiveColor"
+                       width="32" @change="radioChange1"></el-switch>
         </div>
-        <div>
-            <span>流动墙</span>
-            <el-switch
-                v-model="radioFlag2"
-                active-color="#13ce66"
-                inactive-color="#2B2B2B"
-                @change="radioChange2">
-            </el-switch>
+        <div class="ops-row">
+            <span class="ops-row__label">流动墙</span>
+            <el-switch v-model="radioFlag2" :active-color="activeColor" :inactive-color="inactiveColor"
+                       width="32" @change="radioChange2"></el-switch>
         </div>
     </div>
 </template>
@@ -35,6 +23,8 @@
 export default {
     data() {
         return {
+            activeColor: '#6dff8a',
+            inactiveColor: '#2c3d34',
             radioFlag: false,
             radioFlag1: false,
             radioFlag2: false,
@@ -91,21 +81,3 @@ export default {
     }
 }
 </script>
-
-<style scoped>
-.env {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    flex-wrap: wrap;
-    overflow-x: auto;
-}
-
-.env > div {
-    margin: 5px 0;
-}
-
-.el-switch {
-    margin-left: 10px;
-}
-</style>

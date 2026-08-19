@@ -1,56 +1,57 @@
 <template>
-    <div class="basic-container">
-        <div class="item">
-            <el-select v-model="optionsLayersIndex" placeholder="基础底图" size="mini">
-                <el-option v-for="item in optionsLayers" :key="item.value" :label="item.label"
-                           :value="item.value"></el-option>
-            </el-select>
-        </div>
-        <div class="item">
-            <el-select v-model="modelData" placeholder="模型对象" size="mini">
-                <el-option v-for="item in modelDataList" :key="item.value" :label="item.label"
-                           :value="item.value"></el-option>
-            </el-select>
-        </div>
-        <div class="item">
-            <el-select v-model="value" placeholder="请选择地图3D模式" size="mini">
-                <el-option v-for="item in options" :key="item.value" :label="item.label"
-                           :value="item.value"></el-option>
-            </el-select>
-        </div>
-        <div class="top-menus">
-            <div v-for="(label, key) in switches" :key="key" class="top-menus-item">
-                <div class="top-menus-item-label">{{ label }}</div>
-                <div class="top-menus-item-switch">
-                    <el-switch v-model="flags[key]" :active-color="activeColor" :inactive-color="inactiveColor"
-                               width="30" @change="handleSwitchChange(key)"></el-switch>
-                </div>
+    <div class="ops-stack">
+        <div class="ops-section">
+            <div class="ops-section__title">底图 / 模式</div>
+            <div class="ops-field">
+                <el-select v-model="optionsLayersIndex" placeholder="基础底图" size="mini">
+                    <el-option v-for="item in optionsLayers" :key="item.value" :label="item.label"
+                               :value="item.value"></el-option>
+                </el-select>
             </div>
-            <div class="top-menus-item">
-                <div class="top-menus-item-label">整体亮度</div>
-                <div class="top-menus-item-slider">
+            <div class="ops-field">
+                <el-select v-model="modelData" placeholder="模型对象" size="mini">
+                    <el-option v-for="item in modelDataList" :key="item.value" :label="item.label"
+                               :value="item.value"></el-option>
+                </el-select>
+            </div>
+            <div class="ops-field">
+                <el-select v-model="value" placeholder="请选择地图3D模式" size="mini">
+                    <el-option v-for="item in options" :key="item.value" :label="item.label"
+                               :value="item.value"></el-option>
+                </el-select>
+            </div>
+        </div>
+        <div class="ops-section">
+            <div class="ops-section__title">显示</div>
+            <div v-for="(label, key) in switches" :key="key" class="ops-row">
+                <span class="ops-row__label">{{ label }}</span>
+                <el-switch v-model="flags[key]" :active-color="activeColor" :inactive-color="inactiveColor"
+                           width="32" @change="handleSwitchChange(key)"></el-switch>
+            </div>
+            <div class="ops-row">
+                <span class="ops-row__label">整体亮度</span>
+                <div class="ops-row__control">
                     <el-slider v-model="brightness" :max="2" :step="0.1"></el-slider>
                 </div>
             </div>
-            <div class="top-menus-item">
-                <div class="top-menus-item-label">视角大小</div>
-                <div class="top-menus-item-slider">
+            <div class="ops-row">
+                <span class="ops-row__label">视角大小</span>
+                <div class="ops-row__control">
                     <el-slider v-model="fov" :max="2" :step="0.1"></el-slider>
                 </div>
             </div>
-            <div v-for="(label, key) in buttons" :key="key" class="top-menus-item">
-                <el-button size="mini" type="primary" @click="handleSelect(key)">{{ label }}</el-button>
+        </div>
+        <div class="ops-section">
+            <div class="ops-section__title">动作</div>
+            <div class="ops-actions">
+                <el-button v-for="(label, key) in buttons" :key="key" size="mini" @click="handleSelect(key)">
+                    {{ label }}
+                </el-button>
             </div>
-            <div class="env">
-                <div>
-                    <span>clock暂停</span>
-                    <el-switch
-                        v-model="clockFlag"
-                        active-color="#13ce66"
-                        inactive-color="#2B2B2B"
-                        @change="clockChange">
-                    </el-switch>
-                </div>
+            <div class="ops-row">
+                <span class="ops-row__label">clock暂停</span>
+                <el-switch v-model="clockFlag" :active-color="activeColor" :inactive-color="inactiveColor"
+                           width="32" @change="clockChange"></el-switch>
             </div>
         </div>
     </div>
@@ -105,8 +106,8 @@ export default {
                 changeShadowFlag: false,
                 terrainFlag: false
             },
-            activeColor: '#13ce66',
-            inactiveColor: '#2B2B2B',
+            activeColor: '#6dff8a',
+            inactiveColor: '#2c3d34',
             switches: {
                 changeGlobleLightFlag: 'SunLight光照',
                 changeLightFlag: '光照系统',
@@ -190,34 +191,3 @@ export default {
     }
 };
 </script>
-
-<style lang="scss" scoped>
-.basic-container {
-    padding: 20px;
-
-    .item {
-        margin: 10px 0;
-    }
-
-    .top-menus {
-        display: flex;
-        flex-direction: column;
-    }
-
-    .top-menus-item {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 10px;
-
-        .top-menus-item-label {
-            font-weight: bold;
-        }
-
-        .top-menus-item-switch, .top-menus-item-slider {
-            width: 200px;
-            justify-content: flex-end;
-        }
-    }
-}
-</style>

@@ -1,9 +1,12 @@
 <template>
-    <div class="env">
-        <div class="button addMaterial" @mousedown="handleEnvironmentEffect('Night')">Night</div>
-        <div class="button addMaterial" @mousedown="handleEnvironmentEffect('Rain')">Rain</div>
-        <div class="button addMaterial" @mousedown="handleEnvironmentEffect('Snow')">Snow</div>
-        <div class="button addMaterial" @mousedown="handleEnvironmentEffect('Frog')">Frog</div>
+    <div class="ops-section">
+        <div class="ops-section__title">环境效果</div>
+        <div class="ops-actions">
+            <button class="ops-action" type="button" @mousedown="handleEnvironmentEffect('Night')">Night</button>
+            <button class="ops-action" type="button" @mousedown="handleEnvironmentEffect('Rain')">Rain</button>
+            <button class="ops-action" type="button" @mousedown="handleEnvironmentEffect('Snow')">Snow</button>
+            <button class="ops-action" type="button" @mousedown="handleEnvironmentEffect('Frog')">Frog</button>
+        </div>
     </div>
 </template>
 
@@ -40,41 +43,3 @@ export default {
     }
 }
 </script>
-
-<style scoped>
-.env {
-    width: 100%;
-    height: 100px;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    background-color: #333;
-    padding: 10px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-.button {
-    width: 60px;
-    height: 60px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 2px solid #fff;
-    border-radius: 10px;
-    background-color: #444;
-    color: #fff;
-    font-size: 14px;
-    cursor: pointer;
-    transition: background-color 0.3s, transform 0.3s;
-}
-
-.button:hover {
-    background-color: #555;
-    transform: scale(1.1);
-}
-
-.addMaterial {
-    background-size: cover;
-}
-</style>

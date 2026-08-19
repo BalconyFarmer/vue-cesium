@@ -1,20 +1,17 @@
 <template>
-    <div class="all">
-        <el-tabs v-model="activeName">
-            <div class="material">
-                <div class="normal addMaterialLightLine" @mousedown="mouseDown('addMaterial')">0</div>
-                <div class="normal addGridMaterialProperty" @mousedown="mouseDown('addGridMaterialProperty')">0
-                </div>
-                <div class="normal addColor" @mousedown="mouseDown('addColor')">0</div>
-                <div class="normal addImgMaterial" @mousedown="mouseDown('addImgMaterial')">0</div>
-                <div class="normal addCheckerboardMaterialProperty"
-                     @mousedown="mouseDown('addCheckerboardMaterialProperty')">0
-                </div>
-                <div class="normal addStripeMaterialProperty" @mousedown="mouseDown('addStripeMaterialProperty')">
-                    0
-                </div>
-            </div>
-        </el-tabs>
+    <div class="ops-section">
+        <div class="ops-section__title">材质对象</div>
+        <div class="ops-tiles">
+            <div class="ops-tile addMaterialLightLine" title="发光线条" @mousedown="mouseDown('addMaterial')"></div>
+            <div class="ops-tile addGridMaterialProperty" title="网格材质"
+                 @mousedown="mouseDown('addGridMaterialProperty')"></div>
+            <div class="ops-tile addColor" title="纯色材质" @mousedown="mouseDown('addColor')"></div>
+            <div class="ops-tile addImgMaterial" title="图片材质" @mousedown="mouseDown('addImgMaterial')"></div>
+            <div class="ops-tile addCheckerboardMaterialProperty" title="棋盘材质"
+                 @mousedown="mouseDown('addCheckerboardMaterialProperty')"></div>
+            <div class="ops-tile addStripeMaterialProperty" title="条纹材质"
+                 @mousedown="mouseDown('addStripeMaterialProperty')"></div>
+        </div>
     </div>
 </template>
 
@@ -164,30 +161,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.all {
-    width: 100%;
-    height: 100%;
-    background-color: rgba(43, 43, 43, .5);
-
-    .env, .geo, .material {
-        width: 100%;
-        height: 30%;
-        display: flex;
-        flex-direction: row;
-        justify-content: flex-start;
-        flex-wrap: wrap;
-        overflow-x: auto;
-    }
-
-    .normal {
-        width: 50px;
-        height: 50px;
-        margin: 5px;
-        border: 1px solid yellow;
-        cursor: pointer;
-    }
-
-    .addEllipseTuoWW {
+.addEllipseTuoWW {
         background-image: url("../../assets/geometryIcons/addEllipseTuoWW.png");
         background-size: 100% 100%;
     }
@@ -342,9 +316,8 @@ export default {
         background-size: 100% 100%;
     }
 
-    .redLine {
-        background-image: url("../../assets/geometryIcons/redLine.png");
-        background-size: 100% 100%;
-    }
+.redLine {
+    background-image: url("../../assets/geometryIcons/redLine.png");
+    background-size: 100% 100%;
 }
 </style>

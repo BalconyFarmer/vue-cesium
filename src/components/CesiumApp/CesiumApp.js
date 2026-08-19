@@ -181,7 +181,7 @@ export default class CesiumApp {
         }
         this.cameraFlyToCartesian3(aim)
         // 哥伦比亚特区的 3 英寸/0.08 米像素分辨率图像，覆盖约 69 平方英里
-        let _a = new Cesium.IonImageryProvider({assetId: 3827})
+        let _a = new Cesium.IonImageryProvider({ assetId: 3827 })
         _a.name = "华盛顿"
         const layer = viewer.imageryLayers.addImageryProvider(
             _a
@@ -504,14 +504,14 @@ export default class CesiumApp {
                 break
 
             case 'BING':
-                let _a = new Cesium.IonImageryProvider({assetId: 3})
+                let _a = new Cesium.IonImageryProvider({ assetId: 3 })
                 _a.name = "BING"
                 const layer = this.viewer.imageryLayers.addImageryProvider(
                     _a
                 );
                 break
             case 'BING道路':
-                let BING_ROAD = new Cesium.IonImageryProvider({assetId: 4})
+                let BING_ROAD = new Cesium.IonImageryProvider({ assetId: 4 })
                 BING_ROAD.name = "BING"
                 const layer1 = this.viewer.imageryLayers.addImageryProvider(
                     BING_ROAD

@@ -1,49 +1,30 @@
 <template>
-    <div class="env">
-        <div>
-            <span>moveTip</span>
-            <el-switch
-                v-model="moveToolFlag"
-                active-color="#13ce66"
-                inactive-color="#2B2B2B"
-                @change="moveToolTipsChange">
-            </el-switch>
+    <div class="ops-section">
+        <div class="ops-section__title">演示</div>
+        <div class="ops-row">
+            <span class="ops-row__label">moveTip</span>
+            <el-switch v-model="moveToolFlag" :active-color="activeColor" :inactive-color="inactiveColor"
+                       width="32" @change="moveToolTipsChange"></el-switch>
         </div>
-        <div>
-            <span>飞行飞机</span>
-            <el-switch
-                v-model="flyFlag"
-                active-color="#13ce66"
-                inactive-color="#2B2B2B"
-                @change="fly">
-            </el-switch>
+        <div class="ops-row">
+            <span class="ops-row__label">飞行飞机</span>
+            <el-switch v-model="flyFlag" :active-color="activeColor" :inactive-color="inactiveColor"
+                       width="32" @change="fly"></el-switch>
         </div>
-        <div>
-            <span>移动小人</span>
-            <el-switch
-                v-model="flyFlag1"
-                active-color="#13ce66"
-                inactive-color="#2B2B2B"
-                @change="fly1">
-            </el-switch>
+        <div class="ops-row">
+            <span class="ops-row__label">移动小人</span>
+            <el-switch v-model="flyFlag1" :active-color="activeColor" :inactive-color="inactiveColor"
+                       width="32" @change="fly1"></el-switch>
         </div>
-        <div>
-            <span>移动小车</span>
-            <el-switch
-                v-model="flyFlag2"
-                active-color="#13ce66"
-                inactive-color="#2B2B2B"
-                @change="fly2">
-            </el-switch>
+        <div class="ops-row">
+            <span class="ops-row__label">移动小车</span>
+            <el-switch v-model="flyFlag2" :active-color="activeColor" :inactive-color="inactiveColor"
+                       width="32" @change="fly2"></el-switch>
         </div>
-        <div>
-            <span>GPS</span>
-            <el-switch
-                v-model="GpsFlag"
-                active-color="#13ce66"
-                inactive-color="#2B2B2B"
-                @change="GpsChange">
-            </el-switch>
+        <div class="ops-row">
+            <span class="ops-row__label">GPS</span>
+            <el-switch v-model="GpsFlag" :active-color="activeColor" :inactive-color="inactiveColor"
+                       width="32" @change="GpsChange"></el-switch>
         </div>
     </div>
 </template>
@@ -54,6 +35,8 @@ export default {
     props: ['cApp'],
     data() {
         return {
+            activeColor: '#6dff8a',
+            inactiveColor: '#2c3d34',
             moveToolFlag: false,
             flyFlag: false,
             flyFlag1: false,
@@ -93,12 +76,3 @@ export default {
     }
 };
 </script>
-
-<style scoped>
-.env {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-</style>

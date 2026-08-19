@@ -1,6 +1,13 @@
 <template>
-    <div class="aindex-container">
-        <el-tabs :tab-position="tabPosition">
+    <div class="aindex-container ops-panel">
+        <div class="ops-panel__chrome">
+            <div class="ops-panel__title">
+                <span class="ops-panel__mark"></span>
+                场景控制
+            </div>
+            <div class="ops-panel__status">LIVE</div>
+        </div>
+        <el-tabs class="ops-tabs" :tab-position="tabPosition">
             <el-tab-pane label="基础">
                 <basic></basic>
             </el-tab-pane>
@@ -33,12 +40,9 @@
             </el-tab-pane>
             <el-tab-pane label="数据拾取">
                 <panel></panel>
-
             </el-tab-pane>
         </el-tabs>
-
     </div>
-
 </template>
 
 <script>
@@ -76,12 +80,5 @@ export default {
 }
 </script>
 <style lang="scss">
-.aindex-container {
-    position: relative;
-
-    .el-tabs__content {
-        height: 800px !important;
-        z-index: 999999;
-    }
-}
+@import "./ops-theme";
 </style>

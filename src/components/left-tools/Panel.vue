@@ -1,32 +1,48 @@
 <template>
-    <div class="panel-container">
-        <div class="section">
-            <div class="title">选取位置:</div>
-            <div class="subtitle">log, lat, height</div>
-            <input id="copyValID" :value="clickPosition" readonly type="text"/>
-            <el-button size="mini" @click="handleClick1('copyValID')">Copy</el-button>
-            <div class="subtitle">cartographic-log, cartographic-lat, cartographic-height</div>
-            <input :value="clickPositionCartographic" readonly type="text"/>
-            <div class="subtitle">Cartesian</div>
-            <input :value="clickPositionCartesian" readonly type="text"/>
+    <div class="ops-stack">
+        <div class="ops-section">
+            <div class="ops-section__title">选取位置</div>
+            <p class="ops-caption">log, lat, height</p>
+            <input id="copyValID" class="ops-readout" :value="clickPosition" readonly type="text"/>
+            <div class="ops-actions panel-copy">
+                <el-button size="mini" @click="handleClick1('copyValID')">Copy</el-button>
+            </div>
+            <p class="ops-caption">cartographic-log, cartographic-lat, cartographic-height</p>
+            <input class="ops-readout" :value="clickPositionCartographic" readonly type="text"/>
+            <p class="ops-caption">Cartesian</p>
+            <input class="ops-readout" :value="clickPositionCartesian" readonly type="text"/>
         </div>
-        <div class="section">
-            <div class="title">相机位置</div>
-            <div class="subtitle">x, y, z, heading, pitch, roll</div>
-            <input id="copyValID1" :value="cameraPosition" readonly type="text"/>
-            <el-button size="mini" @click="handleClick1('copyValID1')">Copy</el-button>
+        <div class="ops-section">
+            <div class="ops-section__title">相机位置</div>
+            <p class="ops-caption">x, y, z, heading, pitch, roll</p>
+            <input id="copyValID1" class="ops-readout" :value="cameraPosition" readonly type="text"/>
+            <div class="ops-actions panel-copy">
+                <el-button size="mini" @click="handleClick1('copyValID1')">Copy</el-button>
+            </div>
         </div>
-        <div class="section">
-            <div class="title">实体信息</div>
-            <div>name: {{ currentEntities ? currentEntities.name : '暂无数据' }}</div>
-            <div>Cartesian3: {{ currentEntities ? currentEntities.position._value : '暂无数据' }}</div>
-            <el-input v-model="rotationParams.Heading" placeholder="Heading" size="mini"></el-input>
-            <el-input v-model="rotationParams.Pitch" placeholder="Pitch" size="mini"></el-input>
-            <el-input v-model="rotationParams.Roll" placeholder="Roll" size="mini"></el-input>
-            <el-button size="mini" @click="rotateEntity">rotate</el-button>
-            <span>drag</span>
-            <el-switch v-model="switchValue" active-color="#13ce66" inactive-color="#2B2B2B"
-                       @change="dragChange"></el-switch>
+        <div class="ops-section">
+            <div class="ops-section__title">实体信息</div>
+            <p class="ops-caption">name</p>
+            <div class="ops-readout ops-readout--text">{{ currentEntities ? currentEntities.name : '暂无数据' }}</div>
+            <p class="ops-caption">Cartesian3</p>
+            <div class="ops-readout ops-readout--text">{{ currentEntities ? currentEntities.position._value : '暂无数据' }}</div>
+            <div class="ops-field">
+                <el-input v-model="rotationParams.Heading" placeholder="Heading" size="mini"></el-input>
+            </div>
+            <div class="ops-field">
+                <el-input v-model="rotationParams.Pitch" placeholder="Pitch" size="mini"></el-input>
+            </div>
+            <div class="ops-field">
+                <el-input v-model="rotationParams.Roll" placeholder="Roll" size="mini"></el-input>
+            </div>
+            <div class="ops-actions">
+                <el-button size="mini" @click="rotateEntity">rotate</el-button>
+            </div>
+            <div class="ops-row">
+                <span class="ops-row__label">drag</span>
+                <el-switch v-model="switchValue" active-color="#6dff8a" inactive-color="#2c3d34"
+                           width="32" @change="dragChange"></el-switch>
+            </div>
         </div>
     </div>
 </template>
@@ -81,32 +97,20 @@ export default {
 }
 </script>
 
-<style lang="scss">
-.panel-container {
+<style lang="scss" scoped>
+.panel-copy {
+    margin: 6px 0 10px;
+}
+
+.ops-caption {
+    margin-top: 8px;
+}
+
+.ops-readout--text {
     display: flex;
-    flex-direction: column;
-    width: 100%;
-    padding: 15px;
-    background-color: rgba(43, 43, 43, 0.9);
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-    color: white;
+    align-items: center;
     overflow: hidden;
-
-    .section {
-        margin-bottom: 20px;
-
-        .title {
-            font-weight: bold;
-            margin-bottom: 10px;
-            font-size: 1.1em;
-            color: #fff;
-        }
-
-        .subtitle {
-            font-size: 0.9em;
-            margin-bottom: 5px;
-            color: #bbb;
-        }
-
-
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+</style>
