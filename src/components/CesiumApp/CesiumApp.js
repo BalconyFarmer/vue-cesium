@@ -440,6 +440,7 @@ export default class CesiumApp {
         this.viewer.entities.removeAll()
     }
 
+    // 切换底图
     switchLayer(data) {
         let Imagery = null
 
@@ -448,17 +449,6 @@ export default class CesiumApp {
         }
 
         switch (data) {
-            case 'google实景图层':
-                /**
-                 * 需要开启全局VPN
-                 * 和高德文字不匹配
-                 * @type {Cesium.UrlTemplateImageryProvider}
-                 */
-                Imagery = new Cesium.UrlTemplateImageryProvider({
-                    url: 'http://mt1.google.cn/vt/lyrs=s&hl=zh-CN&x={x}&y={y}&z={z}&s=Gali',
-                })
-                this.viewer.imageryLayers.addImageryProvider(Imagery)
-                break
             case 'ArcGis实景图层':
                 /**
                  * 和高德文字不匹配
