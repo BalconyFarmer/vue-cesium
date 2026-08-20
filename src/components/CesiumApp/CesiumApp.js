@@ -88,7 +88,7 @@ export default class CesiumApp {
         this.viewer.scene.postProcessStages.fxaa.enabled = true// 去锯齿 是文字清晰
         this.animation = new Animation(this)
 
-        this.baseLayer.switchLayer('geoq智图黑')
+        this.baseLayer.switchLayer('天地图矢量科技蓝')
         this.points = new KMLPoints(this)
         this.pointsCluster = new PointsCluster(this)
         this.primitivePoints = new PrimitivesPoints(this)
